@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>《gRPC: Up And Running》读书笔记 - pomato totato</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="pomato totato"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="pomato totato"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="书的内容不多，是我最喜欢的o’reilly出版社出版的，gRPC不算复杂，但是关键是要应用。"><meta property="og:type" content="blog"><meta property="og:title" content="《gRPC: Up And Running》读书笔记"><meta property="og:url" content="https://mjw10086.github.io/2023/06/27/gRPC_Up_And_Running_%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><meta property="og:site_name" content="pomato totato"><meta property="og:description" content="书的内容不多，是我最喜欢的o’reilly出版社出版的，gRPC不算复杂，但是关键是要应用。"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://mjw10086.github.io/img/og_image.png"><meta property="article:published_time" content="2023-06-26T16:00:00.000Z"><meta property="article:modified_time" content="2023-06-27T15:08:39.792Z"><meta property="article:author" content="Pomato"><meta property="article:tag" content="软件开发"><meta property="article:tag" content="框架学习"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://mjw10086.github.io/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://mjw10086.github.io/2023/06/27/gRPC_Up_And_Running_%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"},"headline":"《gRPC: Up And Running》读书笔记","image":["https://mjw10086.github.io/img/og_image.png"],"datePublished":"2023-06-26T16:00:00.000Z","dateModified":"2023-06-27T15:08:39.792Z","author":{"@type":"Person","name":"Pomato"},"publisher":{"@type":"Organization","name":"pomato totato","logo":{"@type":"ImageObject","url":"https://mjw10086.github.io/img/logo.svg"}},"description":"书的内容不多，是我最喜欢的o’reilly出版社出版的，gRPC不算复杂，但是关键是要应用。"}</script><link rel="canonical" href="https://mjw10086.github.io/2023/06/27/gRPC_Up_And_Running_%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+          Array
+              .from(document.querySelectorAll('.tab-content'))
+              .forEach($tab => {
+                  $tab.classList.add('is-hidden');
+              });
+          Array
+              .from(document.querySelectorAll('.tabs li'))
+              .forEach($tab => {
+                  $tab.classList.remove('is-active');
+              });
+          const $activeTab = document.querySelector(location.hash);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+          const $tabMenu = document.querySelector(`a[href="${location.hash}"]`);
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="pomato totato" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/mjw10086/mjw10086.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2023-06-26T16:00:00.000Z" title="6/27/2023, 12:00:00 AM">2023-06-27</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-06-27T15:08:39.792Z" title="6/27/2023, 11:08:39 PM">2023-06-27</time></span><span class="level-item"><a class="link-muted" href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/">软件开发</a></span><span class="level-item">9 minutes read (About 1286 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">《gRPC: Up And Running》读书笔记</h1><div class="content"><p>书的内容不多，是我最喜欢的o’reilly出版社出版的，gRPC不算复杂，但是关键是要应用。</p>
+<span id="more"></span>
+
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>gRPC主要应用在微服务架构中服务间通信，其竞争者有REST、MQ，gRPC的主要优点就是和程序语言融合紧密，相比起REST来说有种强弱类型语言对比的感觉，而相比于MQ来说，缺少了MQ的持久化机制，尽管gRPC是今天的主角，但是很多情况下，gRPC不能替代REST和MQ。向外供人调用的端口使用REST更合适，因为REST广泛且学习成本低，而在需要持久化的情况下，gRPC也替代不了MQ。</p>
+<h1 id="hello-world程序"><a href="#hello-world程序" class="headerlink" title="hello world程序"></a>hello world程序</h1><p>搭建一个gRPC应用的步骤很简单：</p>
+<ol>
+<li>编写proto文件定义接口的方法和消息格式</li>
+<li>使用protoc等工具生成对应的Protocol Buffers相关的源代码</li>
+<li>在具体项目中根据生成的源代码编写服务器或者客户端来实现监听或者通信</li>
+</ol>
+<p>由于框架版本的问题，网上很多教程包括本书的hello world教程都不能正常跑，在这里需要初学者花一些功夫解决这个问题。</p>
+<h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><p>针对gRPC提供了四种通信模式，分别是Unary RPC、Server Streaming、Client Streaming 和 Bidirectional Streaming，主要区别在于请求和相应的数量问题，Unary RPC采用的是一个请求一个相应的模式，而Streaming系列则是代表多个消息，因此Server Streaming就客户端一个请求，而服务器返回多个响应，以此类推理解其他的通信模式。在这里的关键是要理解四种通信模式的使用场景，在实际项目中合理选择。</p>
+<p>另外gRPC还有三种传输实现，分别是HTTP&#x2F;2.0、Cronet和in-process，一般来说都使用HTTP&#x2F;2.0，Cronet是针对移动端的优化实现。</p>
+<p>gRPC的具体实现细节并不需要了解太深，主要是如何编码，在这里暂时省略。</p>
+<h1 id="功能支持"><a href="#功能支持" class="headerlink" title="功能支持"></a>功能支持</h1><p>gRPC在基础的通信基础上提供了额外的功能支持：</p>
+<ul>
+<li>interceptor（拦截器）：拦截器有两种类型，分别是Unary和Stream，两者的函数签名并不相同，拦截器的主要作用相当于web中的中间件。而且要注意，拦截器是从后向前依次执行的。</li>
+<li>deadline（超时）：deadline和timeoute是两种机制，deadline是确定时间点，而timeout是时间段，而且设置的位置也不一样，两者都可以设置在客户端，但是deadline主要是发送给服务器，而timeout则一般都是在客户端设置。两者可以结合使用。</li>
+<li>cancellation（取消）：cancellation是通过Context设置的，没什么额外要说的</li>
+<li>error handling（错误处理）：服务端返回错误是利用status，客户端则根据status的code来做处理</li>
+<li>multiplexing（多路服用）：这里的mutiplexing就是在一个gRPC服务器上注册多个gRPC服务</li>
+<li>metadata（元数据）：十分类似于在http的header上添加自定义的key value</li>
+<li>Name Resolver（域名解析）：使用域名而不是IP来进行通信</li>
+<li>load balancing（负载均衡）：负载均衡主要分为两种实现，客户端实现和服务器端代理实现，前者并不会知晓服务器的情况，因此有局限性，而服务器端代理则可以利用nginx这样的代理软件来实现</li>
+<li>compression（压缩）：利用gzip来对消息进行压缩，节省带宽</li>
+</ul>
+<h1 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h1><p>关于gRPC的安全性，主要依赖于两个部分，TLS和用户认证，TLS支持单向TLS和双向TLS，关于TLS的知识建议自行了解。用户认证也很简单，主要就是通过metadata传输认证信息，再结合interceptor来实现认证。具体的几种认证手段则不多说了。</p>
+<h1 id="生产环境"><a href="#生产环境" class="headerlink" title="生产环境"></a>生产环境</h1><p>关于测试核心注意的就是使用mock工具做单元测试，还有就是ghz可以做负载测试。部署在docker和k8s则属于相关工具的使用，不谈了。</p>
+<p>在程序运行中的观测是十分重要的，利用OpenCensus和Prometheus，可以观测特定指标并进行tracing功能，日志系统则配合interceptor工作。</p>
+<h1 id="生态系统"><a href="#生态系统" class="headerlink" title="生态系统"></a>生态系统</h1><p>在本章介绍了几个工具，分别是：</p>
+<ul>
+<li>gRPC Gateway：将REST转化为gRPC服务</li>
+<li>Transcoding：将REST请求转化为gRPC请求</li>
+<li>Reflection Protocol：通过反射来了解服务器的服务和消息定义</li>
+<li>Middleware：也就是interceptor的功能</li>
+<li>Health Checking &#x2F; Health Probe</li>
+</ul>
+<p>当个了解，然后各取所需</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>《gRPC: Up And Running》读书笔记</p><p><a href="https://mjw10086.github.io/2023/06/27/gRPC_Up_And_Running_读书笔记/">https://mjw10086.github.io/2023/06/27/gRPC_Up_And_Running_读书笔记/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Pomato</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-06-27</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-06-27</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/">软件开发</a><a class="link-muted mr-2" rel="tag" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/">框架学习</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2023/06/10/ipashare%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/"><span class="level-item">简单介绍一个IOS的分发工具：IPAshare</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://mjw10086.github.io/2023/06/27/gRPC_Up_And_Running_%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/';
+            this.page.identifier = '2023/06/27/gRPC_Up_And_Running_读书笔记/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'https-mjw10086-github-io' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://avatars.githubusercontent.com/u/26508537?v=4" alt="Pomato"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Pomato</p><p class="is-size-6 is-block">The question is not how far. The question is, do you possess the constitution, the depth of faith, to go as far as is needed?</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">6</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">2</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">3</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/mjw10086" target="_blank" rel="noopener">Follow</a></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E6%9D%82%E8%B0%88/"><span class="level-start"><span class="level-item">杂谈</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">软件开发</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-06-26T16:00:00.000Z">2023-06-27</time></p><p class="title"><a href="/2023/06/27/gRPC_Up_And_Running_%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">《gRPC: Up And Running》读书笔记</a></p><p class="categories"><a href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/">软件开发</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-06-09T16:00:00.000Z">2023-06-10</time></p><p class="title"><a href="/2023/06/10/ipashare%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/">简单介绍一个IOS的分发工具：IPAshare</a></p><p class="categories"><a href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/">软件开发</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-05-21T16:00:00.000Z">2023-05-22</time></p><p class="title"><a href="/2023/05/22/%E4%BA%94%E6%9C%88%E6%97%85%E8%A1%8C%E6%84%9F%E8%A8%80/">五月旅行感言</a></p><p class="categories"><a href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-02-16T16:00:00.000Z">2023-02-17</time></p><p class="title"><a href="/2023/02/17/about_Freelancer/">关于自由职业者程序员，我半个月的体验</a></p><p class="categories"><a href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-02-14T16:00:00.000Z">2023-02-15</time></p><p class="title"><a href="/2023/02/15/about_LGBT/">关于LGBT，我很厌恶</a></p><p class="categories"><a href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2023/06/"><span class="level-start"><span class="level-item">June 2023</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/05/"><span class="level-start"><span class="level-item">May 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/02/"><span class="level-start"><span class="level-item">February 2023</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/01/"><span class="level-start"><span class="level-item">January 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/%E6%9D%82%E8%B0%88/"><span class="tag">杂谈</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/"><span class="tag">框架学习</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/"><span class="tag">软件开发</span><span class="tag">2</span></a></div></div></div></div></div><div class="column-right-shadow is-hidden-widescreen"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#概述"><span class="level-left"><span class="level-item">1</span><span class="level-item">概述</span></span></a></li><li><a class="level is-mobile" href="#hello-world程序"><span class="level-left"><span class="level-item">2</span><span class="level-item">hello world程序</span></span></a></li><li><a class="level is-mobile" href="#基础概念"><span class="level-left"><span class="level-item">3</span><span class="level-item">基础概念</span></span></a></li><li><a class="level is-mobile" href="#功能支持"><span class="level-left"><span class="level-item">4</span><span class="level-item">功能支持</span></span></a></li><li><a class="level is-mobile" href="#安全性"><span class="level-left"><span class="level-item">5</span><span class="level-item">安全性</span></span></a></li><li><a class="level is-mobile" href="#生产环境"><span class="level-left"><span class="level-item">6</span><span class="level-item">生产环境</span></span></a></li><li><a class="level is-mobile" href="#生态系统"><span class="level-left"><span class="level-item">7</span><span class="level-item">生态系统</span></span></a></li></ul></div></div><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="pomato totato" height="28"></a><p class="is-size-7"><span>&copy; 2023 Pomato</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
